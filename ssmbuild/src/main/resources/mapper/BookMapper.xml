@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	namespace一般指定为当前文件的所在包路径+文件名（将来是接口名）
+	在程序中通过[ namespace + id ]定位到执行哪一条SQL语句
+ -->
+<mapper namespace="com.feng.dao.BookMapper">
+
+    <select id="findAll" resultType="books">
+        select * from ssmbuild.books
+    </select>
+    
+    <insert id="addBook" parameterType="books">
+        insert into ssmbuild.books(bookName, bookCounts, detail)
+        values (#{bookName},#{bookCounts},#{detail});
+    </insert>
+
+    <delete id="deleteBook" parameterType="Integer">
+        delete from ssmbuild.books where bookID=#{bookID}
+    </delete>
+
+    <update id="updateBook" parameterType="books">
+        update ssmbuild.books set bookName=#{bookName},bookCounts=#{bookCounts},detail=#{detail} where bookID=#{bookID}
+    </update>
+
+    <select id="findById" parameterType="Integer" resultType="books">
+        select * from ssmbuild.books where bookID=#{bookID}
+    </select>
+
+    <select id="searchBook" resultType="books" parameterType="String">
+        select * from ssmbuild.books where bookName=#{bookName}
+    </select>
+</mapper>
